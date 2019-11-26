@@ -6,7 +6,10 @@ The architecture is the same as G-ResNeXt in table 1 of the paper. I just re-imp
 
 
 # Guideline for train the G-ResNeXt-50, 101 on ImageNet.
-* just change the imagenet data path, change the GPU ID for fast reproduceing of the GroupConvNet.
-* PyTorch 0.4.0+, 1.0 is all ok.
+* Just change the ImageNet data path, change the GPU ID for fast reproducing of the GroupConvNet.
+* PyTorch 0.4.0+, 1.0 is ok.
 * Pretrained weights can be downloaded from BaiduYunPan (Baidu drive).
 
+# Pre-trained weights
+[G-ResNeXt](https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA)
+* password:c0o6
