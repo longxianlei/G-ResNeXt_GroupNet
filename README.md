@@ -12,3 +12,7 @@ The architecture is the same as G-ResNeXt in table 1 of the paper. I just re-imp
 
 # Pre-trained weights
 Baidu Wangpan: [G-ResNeXt](https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA) password:c0o6 .
+
+For Chinese friends. 
+链接：https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA 
+提取码：c0o6 
