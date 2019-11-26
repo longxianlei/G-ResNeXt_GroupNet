@@ -1,4 +1,4 @@
-# G-ResNeXt_GroupNet
+# G-ResNeXt_GroupNet_DGConv
 This repository reproduces the results of the following paper:
 [**Differentiable Learning-to-Group Channels via Groupable Convolutional Neural Networks**](https://arxiv.org/abs/1908.05867v1)
 re-implement of Group ConvNet, also be called as G-ResNext. It's from the paper, reproduction of the paper "Differentiable Learning-to-Group Channels via Groupable Convolutional Neural Networks".
