@@ -11,5 +11,4 @@ The architecture is the same as G-ResNeXt in table 1 of the paper. I just re-imp
 * Pretrained weights can be downloaded from BaiduYunPan (Baidu drive).
 
 # Pre-trained weights
-[G-ResNeXt](https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA)
-* password:c0o6
+Baidu Wangpan: [G-ResNeXt](https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA) password:c0o6 .
