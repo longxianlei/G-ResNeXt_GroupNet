@@ -4,6 +4,7 @@ This repository reproduces the results of the following paper:
 re-implement of Group ConvNet, also be called as G-ResNext. It's from the paper, reproduction of the paper "Differentiable Learning-to-Group Channels via Groupable Convolutional Neural Networks".
 The architecture is the same as G-ResNeXt in table 1 of the paper. I just re-implemented the GroupNet bu using dynamic grouping convolution (DGConv) operation.
 
+![Illustration structures.](illustration.png)
 
 # Now, i have construct the loss function which considering the complexity of group conv DGConv.
 ![](loss_function.png)
