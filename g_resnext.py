@@ -134,16 +134,16 @@ class G_ResNext(nn.Module):
         x = self.relu(x)
         x = self.maxpool(x)
 
-        x, layer1_sum, layer1_conv_sum = self.layer1(x)
-        x, layer2_sum, layer2_conv_sum = self.layer2(x)
-        x, layer3_sum, layer3_conv_sum = self.layer3(x)
-        x, layer4_sum, layer4_conv_sum = self.layer4(x)
+        x, layer1_sum, layer1_stdconv_sum = self.layer1(x)
+        x, layer2_sum, layer2_stdconv_sum = self.layer2(x)
+        x, layer3_sum, layer3_stdconv_sum = self.layer3(x)
+        x, layer4_sum, layer4_stdconv_sum = self.layer4(x)
 
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
         x = self.fc(x)
 
-        return x, layer1_sum + layer2_sum + layer3_sum + layer4_sum, layer1_conv_sum + layer2_conv_sum + layer3_conv_sum + layer4_conv_sum
+        return x, layer1_sum + layer2_sum + layer3_sum + layer4_sum, layer1_stdconv_sum + layer2_stdconv_sum + layer3_stdconv_sum + layer4_stdconv_sum
 
 
 def g_resnext50(**kwargs):
