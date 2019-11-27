@@ -7,6 +7,7 @@ The architecture is the same as G-ResNeXt in table 1 of the paper. I just re-imp
 
 # Now, i have construct the loss function which considering the complexity of group conv DGConv.
 ![](loss_function.png)
+
 The total complexity of DGConv layers has been added to the loss function. 
 # Guideline for train the G-ResNeXt-50, 101 on ImageNet.
 * Just change the ImageNet data path, change the GPU ID for fast reproducing of the GroupConvNet.
