@@ -238,6 +238,13 @@ def main():
     print(model)
     validate(val_loader, model, criterion)
     return
+  
+  
+def constraint_loss(criterion, output, target_var, U_regularizer_sum, std_conv_sum):
+    loss = criterion(output, target_var)
+    alpha = 0 if U_regularizer_sum[0] < std_conv_sum[0] else -0.02
+    loss_all = loss * torch.pow(std_conv_sum[0]/U_regularizer_sum[0], alpha)
+    return loss_all 
 
 
 def train(train_loader, model, criterion, optimizer, epoch):
@@ -267,8 +274,10 @@ def train(train_loader, model, criterion, optimizer, epoch):
         target_var = target.to(device)
 
         ### Compute output
-        output, _ = model(input_var)
-        loss = criterion(output, target_var)
+        output, U_regularizer_sum, std_conv_sum = model(input_var)
+        
+        # loss = criterion(output, target_var)
+        loss = constraint_loss(criterion, output, target_var, U_regularizer_sum, std_conv_sum)
 
         ### Measure accuracy and record loss
         prec1, prec5 = accuracy(output.data, target_var, topk=(1, 5))
@@ -295,6 +304,8 @@ def train(train_loader, model, criterion, optimizer, epoch):
                   'lr {lr: .4f}'.format(
                       epoch, i, len(train_loader), batch_time=batch_time,
                       data_time=data_time, loss=losses, top1=top1, top5=top5, lr=lr))
+            print('U_regularizer_sum: ', U_regularizer_sum[0] / 1000000)
+            print('std_conv_sum: ', std_conv_sum[0] / 1000000)
     return 100. - top1.avg, 100. - top5.avg, losses.avg, running_lr
 
 
@@ -316,8 +327,10 @@ def validate(val_loader, model, criterion):
             # torch.set_grad_enabled(False)
 
             ### Compute output
-            output, _ = model(input_var)
-            loss = criterion(output, target_var)
+            output, U_regularizer_sum, std_conv_sum = model(input_var)
+            
+            loss = constraint_loss(criterion, output, target_var, U_regularizer_sum, std_conv_sum)
+            # loss = criterion(output, target_var)
 
             ### Measure accuracy and record loss
             prec1, prec5 = accuracy(output.data.cpu(), target, topk=(1, 5))
@@ -337,6 +350,8 @@ def validate(val_loader, model, criterion):
                       'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
                           i, len(val_loader), batch_time=batch_time, loss=losses,
                           top1=top1, top5=top5))
+                print('U_regularizer_sum: ', U_regularizer_sum[0] / 1000000)
+                print('std_conv_sum: ', std_conv_sum[0] / 1000000)
 
     print(' * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f}'
           .format(top1=top1, top5=top5))
