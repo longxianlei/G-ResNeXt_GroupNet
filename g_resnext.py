@@ -36,14 +36,15 @@ class Bottleneck(nn.Module):
 
     def forward(self, x):
         U_regularizer_sum = 0
+        std_conv_sum = 0
         if isinstance(x, tuple):
-            x, U_regularizer_sum = x[0], x[1]
+            x, U_regularizer_sum, std_conv_sum = x[0], x[1], x[2]
         identity = x
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.relu(out)
 
-        out, U_regularizer = self.conv2(out)
+        out, U_regularizer, std_conv = self.conv2(out)
         out = self.bn2(out)
         out = self.relu(out)
 
@@ -56,7 +57,7 @@ class Bottleneck(nn.Module):
         out += identity
         out = self.relu(out)
 
-        return out, U_regularizer_sum + U_regularizer
+        return out, U_regularizer_sum + U_regularizer, std_conv_sum + std_conv
 
 
 class G_ResNext(nn.Module):
@@ -133,16 +134,16 @@ class G_ResNext(nn.Module):
         x = self.relu(x)
         x = self.maxpool(x)
 
-        x, layer1_sum = self.layer1(x)
-        x, layer2_sum = self.layer2(x)
-        x, layer3_sum = self.layer3(x)
-        x, layer4_sum = self.layer4(x)
+        x, layer1_sum, layer1_conv_sum = self.layer1(x)
+        x, layer2_sum, layer2_conv_sum = self.layer2(x)
+        x, layer3_sum, layer3_conv_sum = self.layer3(x)
+        x, layer4_sum, layer4_conv_sum = self.layer4(x)
 
         x = self.avgpool(x)
         x = torch.flatten(x, 1)
         x = self.fc(x)
 
-        return x, layer1_sum + layer2_sum + layer3_sum + layer4_sum
+        return x, layer1_sum + layer2_sum + layer3_sum + layer4_sum, layer1_conv_sum + layer2_conv_sum + layer3_conv_sum + layer4_conv_sum
 
 
 def g_resnext50(**kwargs):
