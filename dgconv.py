@@ -46,13 +46,16 @@ class DGConv2d(nn.Module):
     def forward(self, x):
         setattr(self.gate, 'org', self.gate.data.clone())
         self.gate.data = ((self.gate.org-0).sign() + 1) / 2.
-        U_regularizer = 2**(self.K + torch.sum(self.gate))
+        U_regularizer = 2**(self.K + torch.sum(self.gate))  #This is the DGConv complexity according to equation (9) in paper.
         gate = torch.stack((1 - self.gate, self.gate))
+        std_conv = torch.Tensor([x.size(1)]).cuda() # This is the standard convolution complexity according to paper. 
+        # o=sum(Layer_i)/b, where b is 32.
+        std_complexity = std_conv*std_conv/32
         self.gate.data = self.gate.org
         U, gate = aggregate(gate, self.D, self.I, self.K, sort=self.sort)
         masked_weight = self.conv.weight*U.view(self.out_channels, self.in_channels, 1, 1)
         x = F.conv2d(x, masked_weight, self.conv.bias, self.conv.stride, self.conv.padding, self.conv.dilation)
-        return x, U_regularizer
+        return x, U_regularizer, std_complexity
 
 
 
