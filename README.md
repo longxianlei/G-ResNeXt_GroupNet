@@ -21,3 +21,6 @@ Baidu Wangpan: [G-ResNeXt](https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA) pass
 For Chinese friends. 
 链接：https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA 
 提取码：c0o6 
+
+# results: Prec@1 77.298 Prec@5 93.614 for Group Constrained,
+#          Prec@1 77.982 Prec@5 93.934 for unconstrained.
