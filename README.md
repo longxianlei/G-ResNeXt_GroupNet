@@ -23,7 +23,8 @@ For Chinese friends.
 提取码：c0o6 
 
 # My reproduced results for the Group Constrained ResNeXt and unconstrained one.
+
 |Model | Prec@1 | Prec@5 | Image Size | Dataset| Epoch|
-|---|---|---|---|---|
+|---|---|---|---|---|---|
 |constrained| 77.298% | 93.614% | 224 | ImageNet| 120|
 |unconstrained| 77.982% | 93.934% | 224 | ImageNet| 120|
