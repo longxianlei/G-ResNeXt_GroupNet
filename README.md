@@ -22,5 +22,8 @@ For Chinese friends.
 链接：https://pan.baidu.com/s/1X6qlvArdNsjpjnCV6zrnPA 
 提取码：c0o6 
 
-# results: Prec@1 77.298 Prec@5 93.614 for Group Constrained,
-#          Prec@1 77.982 Prec@5 93.934 for unconstrained.
+# My reproduced results for the Group Constrained ResNeXt and unconstrained one.
+|Model | Prec@1 | Prec@5 | Image Size | Dataset| Epoch|
+|---|---|---|---|---|
+|constrained| 77.298% | 93.614% | 224 | ImageNet| 120|
+|unconstrained| 77.982% | 93.934% | 224 | ImageNet| 120|
